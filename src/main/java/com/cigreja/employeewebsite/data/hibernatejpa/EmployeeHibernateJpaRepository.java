@@ -5,9 +5,7 @@ import com.cigreja.employeewebsite.business.Address;
 import com.cigreja.employeewebsite.business.Employee;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,15 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class EmployeeHibernateJpaRepository {
     
-    @PersistenceUnit
-    EntityManagerFactory emf;
-    
     @PersistenceContext
     EntityManager em;
-    
-    public EntityManager entityManager(){
-        return emf.createEntityManager();
-    }
     
     public Employee getEmployee(String firstName, String lastName){
         Query query = em.createQuery("from Employee "
