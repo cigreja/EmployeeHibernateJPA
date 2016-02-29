@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="EmployeeHibernateJPA:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="EmployeeHibernateJPA-3.5-SNAPSHOT.war">
+      <element id="artifact" artifact-name="EmployeeHibernateJPA:war exploded" />
+    </root>
+  </artifact>
+</component>
