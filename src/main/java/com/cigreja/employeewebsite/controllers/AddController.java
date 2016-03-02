@@ -1,10 +1,12 @@
 
 package com.cigreja.employeewebsite.controllers;
 
-import com.cigreja.employeewebsite.business.Address;
-import com.cigreja.employeewebsite.business.Employee;
-import com.cigreja.employeewebsite.data.hibernatejpa.EmployeeHibernateJpaRepository;
+import com.cigreja.employeewebsite.entities.Address;
+import com.cigreja.employeewebsite.entities.Employee;
+import com.cigreja.employeewebsite.data.repositories.AddressDAO;
+import com.cigreja.employeewebsite.data.repositories.EmployeeDAO;
 import java.util.HashMap;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class AddController {
     
     @Autowired
-    EmployeeHibernateJpaRepository repository;
+    EmployeeDAO employeeDAO;
+
+    @Autowired
+    AddressDAO addressDAO;
 
     @RequestMapping(method = POST)
     public ModelAndView add(HttpServletRequest request){
@@ -36,20 +41,30 @@ public class AddController {
         Address address = new Address(request.getParameter("address"));
         
         // check if user is already in the database
-        Employee employee = repository.getEmployee(firstName,lastName);
+        Employee employee = employeeDAO.getEmployee(firstName,lastName);
         if(employee == null){
-            System.out.println("employee == null");
+
             // create new employee
             employee = new Employee(firstName, lastName);
+            employeeDAO.persist(employee);
+            addressDAO.persist(address);
             employee.getAddresses().add(address);
+            employeeDAO.merge(employee);
             address.getEmployees().add(employee);
-            repository.save(employee, address);
+            addressDAO.merge(address);
         }
         else{
-            if(!repository.containsAddress(employee, address)){
+            List<Address> addresses = addressDAO.getAddresses(employee);
+            if(!addressDAO.containsAddress(addresses,address)){
+
+                employee = employeeDAO.merge(employee);
+                addressDAO.persist(address);
+
                 employee.getAddresses().add(address);
+                employeeDAO.merge(employee);
+
                 address.getEmployees().add(employee);
-                repository.save(employee, address);
+                addressDAO.merge(address);
             }
             else{
                 // display error employee address already exists

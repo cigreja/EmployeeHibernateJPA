@@ -57,7 +57,7 @@ public class DataConfig {
         emf.setDataSource(dataSource);
         emf.setJpaVendorAdapter(adapter);
         emf.setJpaProperties(hibernateProperties);
-        emf.setPackagesToScan("com.cigreja.employeewebsite.business");
+        emf.setPackagesToScan("com.cigreja.employeewebsite.entities");
         return emf;
     }
 

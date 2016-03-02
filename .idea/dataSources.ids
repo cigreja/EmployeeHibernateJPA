@@ -10,7 +10,7 @@
       <schema id="1" name="hibernatedb"/>
       <table id="2" parent="1" name="address"/>
       <table id="3" parent="1" name="employee"/>
-      <table id="4" parent="1" name="employee_address"/>
+      <table id="4" parent="1" name="map"/>
       <column id="5" parent="2" name="ADDRESS_ID">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
@@ -44,21 +44,21 @@
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <index id="14" parent="4" name="FK_3v9kwqviksdctaqfq5qt509q5">
+      <index id="14" parent="4" name="FK_6bsc2qesn23hpkmffvnxu6iy0">
         <columns>employees_EMPLOYEE_ID</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="15" parent="4" name="FK_dps1tnqytasdxuylp40a7o384">
+      <index id="15" parent="4" name="FK_nilwc17kigx4eemawab9v3vdn">
         <columns>addresses_ADDRESS_ID</columns>
         <desc-columns></desc-columns>
       </index>
-      <foreign-key id="16" parent="4" name="FK_3v9kwqviksdctaqfq5qt509q5">
+      <foreign-key id="16" parent="4" name="FK_6bsc2qesn23hpkmffvnxu6iy0">
         <columns>employees_EMPLOYEE_ID</columns>
         <ref-key>~.employee.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="17" parent="4" name="FK_dps1tnqytasdxuylp40a7o384">
+      <foreign-key id="17" parent="4" name="FK_nilwc17kigx4eemawab9v3vdn">
         <columns>addresses_ADDRESS_ID</columns>
         <ref-key>~.address.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @Import(DataConfig.class)
-@ComponentScan("com.cigreja.employeewebsite.data.hibernatejpa")
+@ComponentScan("com.cigreja.employeewebsite.data.repositories")
 public class RootConfig {
 
 }

@@ -1,8 +1,10 @@
 
-package com.cigreja.employeewebsite.data.hibernatejpa;
+package com.cigreja.employeewebsite.data.repositories;
 
-import com.cigreja.employeewebsite.business.Address;
-import com.cigreja.employeewebsite.business.Employee;
+import com.cigreja.employeewebsite.entities.Address;
+import com.cigreja.employeewebsite.entities.Employee;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,11 +19,19 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class EmployeeHibernateJpaRepository {
+public class EmployeeDAO {
     
     @PersistenceContext
     EntityManager em;
-    
+
+    public void persist(Employee employee){
+        em.persist(employee);
+    }
+
+    public Employee merge(Employee employee){
+        return em.merge(employee);
+    }
+
     public Employee getEmployee(String firstName, String lastName){
         Query query = em.createQuery("from Employee "
                                          + "where FIRST_NAME =:firstName "
@@ -35,22 +45,10 @@ public class EmployeeHibernateJpaRepository {
             return (Employee) employees.get(0);
         }
     }
-    
-    public void save(Employee employee, Address address){
-        em.persist(employee);
-        em.persist(address);
-    }
-   
-    public boolean containsAddress(Employee employee, Address address){
-        
-        List<Address> addresses;
-        addresses = employee.getAddresses();
-            
-        for(Address a : addresses){
-            if(address.getAddress().equals(a.getAddress())){
-                return true;
-            }
-        }
-        return false;
+
+    public List<Address> getAddresses(Employee employee){
+
+        List<Address> addresses = new ArrayList<>();
+        return addresses;
     }
 }

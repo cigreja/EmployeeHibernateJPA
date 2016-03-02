@@ -138,7 +138,7 @@
     </center>
 
     <!-- EMPLOYEE ADDRESSES --> 
-    <c:if test=" ${addresses} == null">
+    <c:if test=" ${addresses eq null} ">
         <center>
             <div class="divContainer">
                 <div class="divHeader">
