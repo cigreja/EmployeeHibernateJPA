@@ -10,9 +10,17 @@
 <html ng-app="app1" >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <!-- CSS -->
         <c:url var="maincss" value="/resources/css/main.css" />
         <link rel="stylesheet" type="text/css" href="${maincss}" />
-        <title>title</title>
+
+        <!-- JQUERY IMPORT CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+        </script>
+
+        <title>JPA</title>
+
     </head>
     <body  ng-controller="ctrl1">
 
